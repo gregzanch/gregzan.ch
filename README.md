@@ -23,3 +23,39 @@ yarn create next-app --example with-three-js with-three-js-app
 ```
 
 Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+
+```html
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#">link</a></li>
+        <li><a href="#">link</a></li>
+        <li><a href="#">link</a></li>
+      </ul>
+    </nav>
+    <h1>Page Title</h1>
+  </header>
+
+  <section>
+    <h2>My Blog Posts</h2>
+    <article>
+      <header>
+        <p>Article Title</p>
+      </header>
+      <p>content</p>
+    </article>
+    <article>
+      <header>
+        <p>Article Title</p>
+      </header>
+      <p>content</p>
+    </article>
+    <aside>
+      <p>Author info</p>
+    </aside>
+  </section>
+
+  <footer>Copyright Info</footer>
+</body>
+```

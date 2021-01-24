@@ -1,14 +1,16 @@
-import { useRef, useState } from 'react'
-import { Canvas, useFrame } from 'react-three-fiber'
-import { OrbitControls, Box } from 'drei'
+//@ts-nocheck
+import { useRef, useState } from "react";
+import { Canvas, useFrame, MeshProps } from "react-three-fiber";
+import { Mesh } from "three";
+import { OrbitControls, Box } from "drei";
 
-const MyBox = (props) => {
-  const mesh = useRef()
+const MyBox = (props: MeshProps) => {
+  const mesh = useRef() as React.RefObject<Mesh>;
 
-  const [hovered, setHover] = useState(false)
-  const [active, setActive] = useState(false)
+  const [hovered, setHover] = useState(false);
+  const [active, setActive] = useState(false);
 
-  useFrame(() => (mesh.current.rotation.x = mesh.current.rotation.y += 0.01))
+  useFrame(() => (mesh.current!.rotation.x = mesh.current!.rotation.y += 0.01));
 
   return (
     <Box
@@ -22,11 +24,11 @@ const MyBox = (props) => {
     >
       <meshStandardMaterial
         attach="material"
-        color={hovered ? '#2b6c76' : '#720b23'}
+        color={hovered ? "#2b6c76" : "#720b23"}
       />
     </Box>
-  )
-}
+  );
+};
 
 const BoxesPage = () => {
   return [
@@ -40,7 +42,7 @@ const BoxesPage = () => {
       <MyBox position={[0, -10, 0]} />
       <OrbitControls />
     </Canvas>,
-  ]
-}
+  ];
+};
 
-export default BoxesPage
+export default BoxesPage;
