@@ -1,13 +1,15 @@
-import { Nav, Header, Title, SubTitle, Card } from "../../components";
+import { Nav, Header, Title, SubTitle, RepoListItem } from "../../components";
 import styled from "styled-components";
 import { Repository } from "types/github-api";
 import create from "zustand";
 import { useEffect } from "react";
 
+
 const SortMethods = {
-  NAME_ASCENDING: "Name (A-Z)",
-  NAME_DESCENDING: "Name (Z-A)",
-  LAST_UPDATED: "Last Updated",
+  NAME_ASCENDING: "Sort By: Name (A-Z)",
+  NAME_DESCENDING: "Sort By: Name (Z-A)",
+  LAST_UPDATED: "Sort By: Last Updated",
+  LAST_PUSH: "Sort By: Last Push",
 };
 type SortMethod = keyof typeof SortMethods;
 type ComparisonFunction<T> = (a: T, b: T) => number;
@@ -15,11 +17,10 @@ type ComparisonFunction<T> = (a: T, b: T) => number;
 const time = (date: string) => new Date(date).getTime();
 
 const comparisonFunctions = {
-  NAME_ASCENDING: (a, b) =>
-    +(a.name.toLowerCase() > b.name.toLowerCase()) - 0.5,
-  NAME_DESCENDING: (a, b) =>
-    +(a.name.toLowerCase() < b.name.toLowerCase()) - 0.5,
+  NAME_ASCENDING: (a, b) => +(a.name.toLowerCase() > b.name.toLowerCase()) - 0.5,
+  NAME_DESCENDING: (a, b) => +(a.name.toLowerCase() < b.name.toLowerCase()) - 0.5,
   LAST_UPDATED: (a, b) => time(b.updated_at) - time(a.updated_at),
+  LAST_PUSH: (a, b) => time(b.pushed_at) - time(a.pushed_at),
 } as Record<SortMethod, ComparisonFunction<Repository>>;
 
 const sort = (repos: Repository[], sortMethod: SortMethod): Repository[] => {
@@ -38,7 +39,7 @@ interface State {
 
 const useStore = create((set) => ({
   repos: [] as Repository[],
-  sortMethod: "LAST_UPDATED",
+  sortMethod: "LAST_PUSH",
   setRepos: (repos: Repository[]) => set({ repos }),
   setSortBy: (sortMethod: SortMethod) =>
     set((oldState) => ({
@@ -47,22 +48,54 @@ const useStore = create((set) => ({
     })),
 }));
 
+
+const RepoList = styled.ul`
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0;
+  max-width: 760px;
+`;
+
+
 const ProjectList = () => {
   const repos = useStore((state) => state.repos) as Repository[];
   return (
-    <ul>
+    <RepoList>
       {repos.map((repo, i) => (
-        <Card
-          title={repo.name}
-          subTitle={repo.description || undefined}
-          orderIndex={i}
-          href={`/projects/${repo.name}`}
-          key={repo.id}
-        />
+        <RepoListItem key={repo.id} {...repo} href={`/projects/${repo.name}`}   />
       ))}
-    </ul>
+    </RepoList>
   );
 };
+
+const Select = styled.select`
+  -webkit-writing-mode: horizontal-tb !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: pointer;
+  color: var(--color-mono-1);
+  display: inline-block;
+  box-sizing: border-box;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+  margin: 0em;
+  background-color: rgb(250, 251, 252);
+  border-color: rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  border-style: solid;
+  border-width: 1px;
+  box-shadow: 
+    rgba(27, 31, 35, 0.04) 0px 1px 0px 0px,
+    rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;
+  font-weight: 500;
+  line-height: 20px;
+  overflow-wrap: break-word;
+  padding: 5px 16px;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+`;
+
 
 const SortByDropDown = () => {
   const sortMethods = Object.keys(SortMethods) as SortMethod[];
@@ -72,7 +105,7 @@ const SortByDropDown = () => {
   })) as { sortMethod: SortMethod; setSortBy: State["setSortBy"] };
 
   return (
-    <select
+    <Select
       name="Sort By"
       id="sort-by"
       onChange={(e) => {
@@ -88,26 +121,10 @@ const SortByDropDown = () => {
           </option>
         );
       })}
-    </select>
+    </Select>
   );
 };
 
-//@ts-ignore
-const Index = ({ repos }) => {
-  // console.log(repos);
-  const setRepos = useStore((state) => state.setRepos) as State["setRepos"];
-  useEffect(() => {
-    console.log(repos);
-    setRepos(repos);
-  }, [repos]);
-  return (
-    <div className="main">
-      <Nav currentPage={"projects"} />
-      <SortByDropDown />
-      <ProjectList />
-    </div>
-  );
-};
 
 // This gets called on every request
 export async function getServerSideProps() {
@@ -117,7 +134,53 @@ export async function getServerSideProps() {
   const repos = (await res.json()) as Repository[];
 
   // Pass data to the page via props
-  return { props: { repos: sort(repos, "LAST_UPDATED") } };
+  return { props: { repos: sort(repos, "LAST_PUSH") } };
 }
 
-export default Index;
+const ProjectsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+`;
+
+const FiltersContainer = styled.div`
+  display: flex;
+  /* flex-direction: column; */
+  /* align-items: center; */
+  justify-content: flex-end;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0;
+  width: 100%;
+  max-width: 760px;
+`;
+
+
+
+type ProjectsProps = {
+  repos: Repository[];
+}
+
+const Projects = ({ repos }: ProjectsProps) => {
+  // console.log(repos);
+  const setRepos = useStore((state) => state.setRepos) as State["setRepos"];
+  useEffect(() => {
+    console.log(repos);
+    setRepos(repos);
+  }, [repos]);
+  return (
+    <div className="main">
+      <Nav currentPage={"/projects"} />
+      <ProjectsContainer>
+        <FiltersContainer>
+            <SortByDropDown />
+        </FiltersContainer>
+        <ProjectList />
+      </ProjectsContainer>
+    </div>
+  );
+};
+
+export default Projects;

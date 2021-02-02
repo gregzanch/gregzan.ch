@@ -1,6 +1,6 @@
 import Nav from "../../components/Nav";
 import { Repository } from "types/github-api";
-
+import { useRouter } from 'next/router'
 //@ts-ignore
 export async function getStaticProps({ params }) {
   const request = await fetch(
@@ -14,14 +14,36 @@ export async function getStaticProps({ params }) {
     },
   };
 }
-//@ts-ignore
-const Index = ({ repo }) => {
-  const { name } = repo as Repository;
+
+
+export async function getStaticPaths() {
+  return {
+    paths: [{
+      params: { 
+        name: "cram" 
+      } 
+    }],
+    fallback: true,
+  };
+}
+
+type ProjectProps = {
+  repo: Repository;
+};
+
+const Project = ({ repo }: ProjectProps) => {
+  const router = useRouter()
+  if (router.isFallback) {
+    return <div>Loading...</div>
+  }
+  const { name } = repo;
+  console.log(repo);
   return (
     <div className="main">
-      <Nav currentPage={`projects/${name}`} />
+      <Nav currentPage={`/projects`} />
+      
     </div>
   );
 };
 
-export default Index;
+export default Project;

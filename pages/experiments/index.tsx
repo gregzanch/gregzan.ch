@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Index = () => {
   return (
     <div className="main">
-      <Nav currentPage={"experiments"} />
+      <Nav currentPage={"/experiments"} />
     </div>
   );
 };

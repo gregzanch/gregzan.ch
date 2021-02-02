@@ -6,7 +6,7 @@ export interface Repository {
   private: boolean;
   owner: Owner;
   html_url: string;
-  description: null | string;
+  description?: string;
   fork: boolean;
   url: string;
   forks_url: string;
@@ -52,11 +52,11 @@ export interface Repository {
   ssh_url: string;
   clone_url: string;
   svn_url: string;
-  homepage: null | string;
+  homepage?: string;
   size: number;
   stargazers_count: number;
   watchers_count: number;
-  language: null | string;
+  language?: string;
   has_issues: boolean;
   has_projects: boolean;
   has_downloads: boolean;
@@ -67,7 +67,7 @@ export interface Repository {
   archived: boolean;
   disabled: boolean;
   open_issues_count: number;
-  license: License | null;
+  license?: License;
   forks: number;
   open_issues: number;
   watchers: number;
@@ -78,7 +78,7 @@ export interface License {
   key: string;
   name: string;
   spdx_id: string;
-  url: null | string;
+  url?: string;
   node_id: string;
 }
 

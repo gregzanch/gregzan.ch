@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { Color } from "three";
 
 // https://coolors.co/6b3d7c-a43e6e-dd3f60-fa624b-fa8233-faa21b-cfd9ee-a6c4e2-7cafd6-2885be
 // https://coolors.co/311847-891a3d-e11b33-ff7538-ffcc33-118ab2-b0e0e6-1eb980-045d56
@@ -45,18 +46,32 @@ export const Colors = {
     blue: "#0E90DBff",
     green: "#0B9E43ff",
   },
+  text: {
+    primary: "#586069ff",
+    secondary: "#586069ff",
+    tertiary: "#6a737dff",
+    link: "#0366d6ff",
+    danger: "#cb2431ff",
+    success: "#22863aff",
+  },
 };
+
+type ColorKey = keyof typeof Colors;
+type ColorKind<T extends ColorKey> = keyof typeof Colors[T];
 
 export const GlobalStyle = createGlobalStyle`
   :root {
-    ${Object.keys(Colors.bright)
-      .map(
-        (key: string) =>
-          `--color-${key}: ${
-            (Colors.bright as { [key: string]: string })[key]
-          };`
+    ${Object.keys(Colors)
+      .map((key) =>
+        Object.keys(Colors[key as ColorKey])
+          .map((kind) => {
+            const colorkey = key as ColorKey;
+            const colorkind = kind as ColorKind<typeof colorkey>;
+            return `--color-${colorkey}-${colorkind}: ${Colors[colorkey][colorkind]};`;
+          })
+          .join("\n")
       )
-      .join("\n")}
+      .join("\n")}          
   }
   html {
     font-family: "Inter", sans-serif;

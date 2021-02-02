@@ -28,8 +28,7 @@ const LinkItem = styled.a`
   text-align: left;
   vertical-align: top;
   padding: 8px 8px;
-  font-weight: 300;
-  text-decoration: none;
+  font-weight: 400;
   color: ${Colors.mono[1]};
 `;
 
@@ -45,23 +44,38 @@ type NavLinkProps = {
   href: string;
   as?: string;
   title: string;
+  isCurrentPage: boolean;
 };
 
-const NavLink = ({ href, as, title }: NavLinkProps) => {
+const NavLink = ({ href, as, title, isCurrentPage }: NavLinkProps) => {
   return (
     <ListItem>
       <Link href={href} as={as || href} passHref>
-        <LinkItem title={title}>{title}</LinkItem>
+        <LinkItem
+          style={{
+            textDecoration: isCurrentPage ? "underline" : "none",
+          }}
+          title={title}
+        >
+          {title}
+        </LinkItem>
       </Link>
     </ListItem>
   );
 };
 
-const MainLink = ({ href, as, title }: NavLinkProps) => {
+const MainLink = ({ href, as, title, isCurrentPage }: NavLinkProps) => {
   return (
     <ListItem>
       <Link href={href} as={as || href} passHref>
-        <LinkItem title={title}>{title}</LinkItem>
+        <LinkItem
+          style={{
+            textDecoration: isCurrentPage ? "underline" : "none",
+          }}
+          title={title}
+        >
+          {title}
+        </LinkItem>
       </Link>
     </ListItem>
   );
@@ -71,12 +85,28 @@ export const Nav = ({ currentPage }: NavProps) => {
   return (
     <NavBar>
       <NavGroup>
-        <MainLink href="/" title="greg zanchelli" />
+        <MainLink
+          href="/"
+          title="greg zanchelli"
+          isCurrentPage={currentPage === "/"}
+        />
       </NavGroup>
       <NavGroup>
-        <NavLink href="/about" title="about" />
-        <NavLink href="/projects" title="projects" />
-        <NavLink href="/experiments" title="experiments" />
+        <NavLink
+          href="/projects"
+          title="projects"
+          isCurrentPage={currentPage === "/projects"}
+        />
+        <NavLink
+          href="/about"
+          title="about"
+          isCurrentPage={currentPage === "/about"}
+        />
+        {/* <NavLink
+          href="/experiments"
+          title="experiments"
+          isCurrentPage={currentPage === "/experiments"}
+        /> */}
         {/* <NavLink href="/cv" title="cv" /> */}
       </NavGroup>
     </NavBar>
