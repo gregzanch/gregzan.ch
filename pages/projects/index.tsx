@@ -62,7 +62,7 @@ const ProjectList = () => {
   return (
     <RepoList>
       {repos.map((repo, i) => (
-        <RepoListItem key={repo.id} {...repo} href={`/projects/${repo.name}`}   />
+        <RepoListItem key={repo.id} {...repo} href={repo.html_url} />
       ))}
     </RepoList>
   );
