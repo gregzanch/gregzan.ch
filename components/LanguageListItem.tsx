@@ -26,10 +26,7 @@ const Center = styled.div`
 `;
 
 export const LanguageListItem = ({ language }: LanguageListItemProps) => {
-  console.log(getLanguageColor(language));
-  const languageColor = useMemo(() => getLanguageColor(language), [
-    getLanguageColor,
-  ]);
+  const languageColor = useMemo(() => getLanguageColor(language), [getLanguageColor]);
   return (
     <Center>
       <Dot color={languageColor}>•</Dot>

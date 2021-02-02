@@ -32,16 +32,15 @@ type ProjectProps = {
 };
 
 const Project = ({ repo }: ProjectProps) => {
-  const router = useRouter()
+  const router = useRouter();
   if (router.isFallback) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
   const { name } = repo;
-  console.log(repo);
+
   return (
     <div className="main">
       <Nav currentPage={`/projects`} />
-      
     </div>
   );
 };

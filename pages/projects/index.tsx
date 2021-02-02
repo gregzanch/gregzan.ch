@@ -110,7 +110,6 @@ const SortByDropDown = () => {
       id="sort-by"
       onChange={(e) => {
         setSortBy(e.target.value as SortMethod);
-        console.log(e.target.value);
       }}
       value={sortMethod}
     >
@@ -167,7 +166,6 @@ const Projects = ({ repos }: ProjectsProps) => {
   // console.log(repos);
   const setRepos = useStore((state) => state.setRepos) as State["setRepos"];
   useEffect(() => {
-    console.log(repos);
     setRepos(repos);
   }, [repos]);
   return (
