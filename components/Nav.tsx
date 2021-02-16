@@ -102,6 +102,11 @@ export const Nav = ({ currentPage }: NavProps) => {
           title="about"
           isCurrentPage={currentPage === "/about"}
         />
+        <NavLink
+          href="/resume.pdf"
+          title="resume"
+          isCurrentPage={currentPage === "/resume.pdfs"}
+        />
         {/* <NavLink
           href="/experiments"
           title="experiments"
