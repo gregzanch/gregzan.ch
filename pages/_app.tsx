@@ -37,14 +37,14 @@ function App({ Component, pageProps }: Props) {
         <meta property="og:url" content="https://gregzan.ch/"/>
         <meta property="og:title" content="gregzan.ch"/>
         <meta property="og:description" content="I'm a mechanical, acoustical, and software engineer. My research interests revolve around scientific computing, primarily computational acoustics."/>
-        <meta property="og:image" content="/cram3.png"/>
+        <meta property="og:image" content="/img/cram3.png"/>
 
 
         <meta property="twitter:card" content="summary_large_image"/>
         <meta property="twitter:url" content="https://gregzan.ch/"/>
         <meta property="twitter:title" content="gregzan.ch"/>
         <meta property="twitter:description" content="I'm a mechanical, acoustical, and software engineer. My research interests revolve around scientific computing, primarily computational acoustics."/>
-        <meta property="twitter:image" content="/cram3.png"/>
+        <meta property="twitter:image" content="/img/cram3.png"/>
       </Head>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
