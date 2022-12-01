@@ -5,9 +5,10 @@ GitHub: [@gregzanch](github.com/gregzanch)
 LinkedIn: [@gregzanch](https://www.linkedin.com/in/gregzanch)
 Email: [zanchelli.greg@gmail.com](mailto:zanchelli.greg@gmail.com)
 
-
-## OBJECTIVE
-Looking to secure a position as a software engineer that will allow me to utilize the programming skills I’ve acquired over the past four years, and build a successful engineering career.
+## EDUCATION
+**University of Hartford** West Hartford, CT
+Aug 2017 - May 2021
+Bachelor of Science in Mechanical Engineering (Acoustics Concentration) with Mathematics Minor
 
 ## TECHNICAL SKILLS
 | Category        | Skills                                                                               |
@@ -19,9 +20,18 @@ Looking to secure a position as a software engineer that will allow me to utiliz
 | Core Competency | Agile, Team leadership, People Management, Critical Thinking, Problem Solving.      |
 
 ## EXPERIENCE
+### CertiK
+_Software Engineer_
+July 2021 - Present
+
+- Lead the frontend development of SkyHarbor, a web application that allows auditors to efficiently communicate with clients.
+- Designed APIs for our backend which serves information from our databases.
+- Mentored 4 interns (3 month internship). Responsibilities include onboarding, teaching best practices, and code reviews.
+- Conducted 15+ interviews for full time and internship roles. I also designed the interview procedure for other engineers to follow.
+
 ### Panimate
 _CTO / Lead Software Engineer_
-July 2020 - Present
+July 2020 - July 2021
 
 - Leading a team of 8 software engineers to create an application that utilizes state-of-the-art NLP and machine learning for novel methods of communication.
 - Implemented a semantic search API using universal sentence encoders, paired with a real-time database hosted on AWS EC2 instances.
@@ -61,7 +71,3 @@ Engineered a language-agnostic data visualization application. Designed the appl
 Developed a command-line application that allows users to create SVG animations using a JSON schema.
 
 
-## EDUCATION
-**University of Hartford** West Hartford, CT
-Aug 2017 - May 2021
-Bachelor of Science in Mechanical Engineering (Acoustics Concentration) with Mathematics Minor
