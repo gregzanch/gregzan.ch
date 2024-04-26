@@ -1,9 +1,8 @@
 import { Nav, Header, Title, SubTitle, RepoListItem } from "../../components";
 import styled from "styled-components";
 import { Repository } from "types/github-api";
-import create from "zustand";
+import { create } from "zustand";
 import { useEffect } from "react";
-
 
 const SortMethods = {
   NAME_ASCENDING: "Sort By: Name (A-Z)",
@@ -42,12 +41,11 @@ const useStore = create((set) => ({
   sortMethod: "LAST_PUSH",
   setRepos: (repos: Repository[]) => set({ repos }),
   setSortBy: (sortMethod: SortMethod) =>
-    set((oldState) => ({
+    set((oldState: any) => ({
       sortMethod,
-      repos: [...sort(((oldState as unknown) as State).repos, sortMethod)],
+      repos: [...sort((oldState as unknown as State).repos, sortMethod)],
     })),
 }));
-
 
 const RepoList = styled.ul`
   margin-block-start: 0;
@@ -56,9 +54,8 @@ const RepoList = styled.ul`
   max-width: 760px;
 `;
 
-
 const ProjectList = () => {
-  const repos = useStore((state) => state.repos) as Repository[];
+  const repos = useStore((state: any) => state.repos) as Repository[];
   return (
     <RepoList>
       {repos.map((repo, i) => (
@@ -70,6 +67,7 @@ const ProjectList = () => {
 
 const Select = styled.select`
   -webkit-writing-mode: horizontal-tb !important;
+  writing-mode: horizontal-tb !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   cursor: pointer;
@@ -84,9 +82,7 @@ const Select = styled.select`
   border-radius: 6px;
   border-style: solid;
   border-width: 1px;
-  box-shadow: 
-    rgba(27, 31, 35, 0.04) 0px 1px 0px 0px,
-    rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;
+  box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;
   font-weight: 500;
   line-height: 20px;
   overflow-wrap: break-word;
@@ -96,10 +92,9 @@ const Select = styled.select`
   white-space: nowrap;
 `;
 
-
 const SortByDropDown = () => {
   const sortMethods = Object.keys(SortMethods) as SortMethod[];
-  const { sortMethod, setSortBy } = useStore((state) => ({
+  const { sortMethod, setSortBy } = useStore((state: any) => ({
     sortMethod: state.sortMethod,
     setSortBy: state.setSortBy,
   })) as { sortMethod: SortMethod; setSortBy: State["setSortBy"] };
@@ -124,12 +119,9 @@ const SortByDropDown = () => {
   );
 };
 
-
 // This gets called on every request
 export async function getServerSideProps() {
-  const res = await fetch(
-    "https://api.github.com/users/gregzanch/repos?sort=updated-asc"
-  );
+  const res = await fetch("https://api.github.com/users/gregzanch/repos?sort=updated-asc");
   const repos = (await res.json()) as Repository[];
 
   // Pass data to the page via props
@@ -141,7 +133,6 @@ const ProjectsContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
 `;
 
 const FiltersContainer = styled.div`
@@ -156,15 +147,13 @@ const FiltersContainer = styled.div`
   max-width: 760px;
 `;
 
-
-
 type ProjectsProps = {
   repos: Repository[];
-}
+};
 
 const Projects = ({ repos }: ProjectsProps) => {
   // console.log(repos);
-  const setRepos = useStore((state) => state.setRepos) as State["setRepos"];
+  const setRepos = useStore((state: any) => state.setRepos) as State["setRepos"];
   useEffect(() => {
     setRepos(repos);
   }, [repos]);
@@ -173,7 +162,7 @@ const Projects = ({ repos }: ProjectsProps) => {
       <Nav currentPage={"/projects"} />
       <ProjectsContainer>
         <FiltersContainer>
-            <SortByDropDown />
+          <SortByDropDown />
         </FiltersContainer>
         <ProjectList />
       </ProjectsContainer>
