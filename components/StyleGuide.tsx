@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-import { Color } from "three";
 
 // https://coolors.co/6b3d7c-a43e6e-dd3f60-fa624b-fa8233-faa21b-cfd9ee-a6c4e2-7cafd6-2885be
 // https://coolors.co/311847-891a3d-e11b33-ff7538-ffcc33-118ab2-b0e0e6-1eb980-045d56
@@ -7,18 +6,7 @@ import { Color } from "three";
 /* Array */
 
 export const Colors = {
-  mono: [
-    "#0a0a0a",
-    "#1e1e1e",
-    "#323232",
-    "#595959",
-    "#7f7f7f",
-    "#a5a5a5",
-    "#cccccc",
-    "#ebebeb",
-    "#f5f5f5",
-    "#ffffff",
-  ],
+  mono: ["#0a0a0a", "#1e1e1e", "#323232", "#595959", "#7f7f7f", "#a5a5a5", "#cccccc", "#ebebeb", "#f5f5f5", "#ffffff"],
   bright: {
     purple: "#311847ff",
     magenta: "#891a3dff",
@@ -57,7 +45,7 @@ export const Colors = {
 };
 
 type ColorKey = keyof typeof Colors;
-type ColorKind<T extends ColorKey> = keyof typeof Colors[T];
+type ColorKind<T extends ColorKey> = keyof (typeof Colors)[T];
 
 export const GlobalStyle = createGlobalStyle`
   :root {
@@ -69,7 +57,7 @@ export const GlobalStyle = createGlobalStyle`
             const colorkind = kind as ColorKind<typeof colorkey>;
             return `--color-${colorkey}-${colorkind}: ${Colors[colorkey][colorkind]};`;
           })
-          .join("\n")
+          .join("\n"),
       )
       .join("\n")}          
   }

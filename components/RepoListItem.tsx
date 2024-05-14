@@ -3,15 +3,14 @@ import Link from "next/link";
 import LanguageListItem from "./LanguageListItem";
 import { Repository } from "types/github-api";
 import { Time } from "../util/time";
+
 const ListItem = styled.li`
   list-style: none;
   margin: 4px 0px;
   padding: 20px 0px;
   border-bottom: solid 1px var(--color-mono-7);
-  /* border-radius: 4px; */
   margin-left: 1em;
   margin-right: 1em;
-}
 `;
 
 export interface RepoListItemProps extends Repository {

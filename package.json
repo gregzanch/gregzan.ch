@@ -1,5 +1,5 @@
 {
-  "name": "with-three-js",
+  "name": "gregzanch",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,9 +15,7 @@
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
     "react-is": "^18.3.0",
-    "react-three-fiber": "^6.0.13",
     "styled-components": "^6.1.8",
-    "three": "^0.164.0",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
