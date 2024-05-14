@@ -1,6 +1,5 @@
 import Nav from "../components/Nav";
 import styled from "styled-components";
-import SVGBlob from "components/SVGBlob";
 
 const Footer = styled.footer`
   position: absolute;
