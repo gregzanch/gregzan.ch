@@ -1,4 +1,3 @@
-import { Repository } from "types/github-api";
 import styled from "styled-components";
 import Link from "next/link";
 
@@ -18,12 +17,6 @@ const RepoCardContainer = styled.div`
   border-radius: 16px;
 `;
 
-const LightText = styled.p`
-  color: var(--color-text-secondary);
-  margin: 0;
-  font-size: 10pt;
-`;
-
 const Description = styled.p`
   color: var(--color-text-secondary);
   margin: 8px 0px;
@@ -37,7 +30,7 @@ const RepoTitle = styled.h4`
   margin-bottom: 8px;
 `;
 
-const LinkElement = styled.a`
+const LinkElement = styled.span`
   color: var(--color-text-link);
   text-decoration: none;
   :hover {
@@ -60,7 +53,7 @@ const RepoInfo = styled.div`
   border-bottom-left-radius: 16px;
 `;
 
-const ImageContainer = styled.a`
+const ImageContainer = styled.span`
   border-top-right-radius: 16px;
   border-top-left-radius: 16px;
   max-height: 400px;

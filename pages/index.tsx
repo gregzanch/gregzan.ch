@@ -1,6 +1,3 @@
-import SVGBlob from "components/SVGBlob";
-import Image from "next/image";
-
 import Nav from "../components/Nav";
 import styled from "styled-components";
 import { RepoCard } from "components/RepoCard";
@@ -13,7 +10,6 @@ const GridContainer = styled.div`
   /* margin-left: 10%; */
   max-width: 600px;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
   grid-auto-flow: dense;
   row-gap: 2em;
   margin-bottom: 2em;
@@ -33,8 +29,6 @@ const GridContainer = styled.div`
     width: min-content;
   }
 `;
-
-
 
 const Index = () => {
   return (

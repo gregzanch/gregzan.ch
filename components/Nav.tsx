@@ -21,7 +21,7 @@ const ListItem = styled.li`
   display: inline;
 `;
 
-const LinkItem = styled.a`
+const LinkItem = styled.span`
   font-family: "Inter var";
   font-size: 14px;
   line-height: 100%;
@@ -50,7 +50,7 @@ type NavLinkProps = {
 const NavLink = ({ href, as, title, isCurrentPage }: NavLinkProps) => {
   return (
     <ListItem>
-      <Link href={href} as={as || href} passHref>
+      <Link href={href} as={as || href} passHref style={{ textDecoration: "none" }}>
         <LinkItem
           style={{
             textDecoration: isCurrentPage ? "underline" : "none",
@@ -67,7 +67,7 @@ const NavLink = ({ href, as, title, isCurrentPage }: NavLinkProps) => {
 const MainLink = ({ href, as, title, isCurrentPage }: NavLinkProps) => {
   return (
     <ListItem>
-      <Link href={href} as={as || href} passHref>
+      <Link href={href} as={as || href} passHref style={{ textDecoration: "none" }}>
         <LinkItem
           style={{
             textDecoration: isCurrentPage ? "underline" : "none",
